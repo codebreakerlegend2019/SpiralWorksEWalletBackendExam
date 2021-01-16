@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SpiralWorksWalletBackendExam</name>
+    </assembly>
+    <members>
+        <member name="M:SpiralWorksWalletBackendExam.Controllers.AuthController.Login(SpiralWorksWalletBackendExam.Dtos.UserAccountDto.UserAccountSaveDto)">
+            <summary>
+            Generate Token to use the other services like Deposit, Withdraw, Transfer and Getting Transaction Reports.
+            </summary>
+            <param name="loginCredentials"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SpiralWorksWalletBackendExam.Controllers.AuthController.Register(SpiralWorksWalletBackendExam.Dtos.UserAccountDto.UserAccountSaveDto)">
+            <summary>
+            Register to the E-Wallet
+            </summary>
+            <param name="userAccountDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SpiralWorksWalletBackendExam.Controllers.TransactionController.GetReports(SpiralWorksWalletBackendExam.Dtos.TransactionDto.TransactionReportParameterDto)">
+            <summary>
+            Get Transaction Reports by Transaction Type (Withdraw, Deposit and Transfer)
+            </summary>
+            <remarks>
+            Sample JSON body to be send:
+            
+                {
+                    "transactionType": "string",// It can be "Withdraw", "Deposit", "Transfer" or "All" in any case.
+                    "dateFrom": "2021-01-16T16:00:51.924Z",
+                    "dateTo": "2021-01-16T16:00:51.924Z"
+                }
+                
+            Sample JSON Body of Withdraw Reports:
+            
+                [
+                    {
+                        "id": 4,
+                        "accountNumber": "0000000001",
+                        "beforeBalance": 5000,
+                        "afterBalance": 4500,
+                        "amountWithdrew": 500,
+                        "transactionType": "WITHDRAW",
+                        "dateTime": "2021-01-15T23:43:27.4095009"
+                    }
+                ]
+                
+            Sample JSON Body of Deposit Reports:
+            
+                [
+                    {
+                        "id": 3,
+                        "accountNumber": "0000000001",
+                        "beforeBalance": 2500,
+                        "afterBalance": 5000,
+                        "amountWithdrew": 2500,
+                        "transactionType": "Deposit",
+                        "dateTime": "2021-01-15T23:42:48.4361285"
+                    }
+                ]
+                
+            Sample JSON Body of Transfer Reports:
+            
+                [
+                    {
+                        "id": 6,
+                        "beforeBalance": 4000,
+                        "afterBalance": 2500,
+                        "transactionType": "TRANSFER",
+                        "senderAccountNumber": "0000000001 - (You)",
+                        "recipientAccountNumber": "0000000002",
+                        "amountTransferred": 1500,
+                        "dateTime": "2021-01-15T23:49:54.3603526"
+                    }
+                ]
+            
+            Sample JSON Body Mixed or All Types of Transactions:
+            
+                [
+                    {
+                        "id": 3,
+                        "accountNumber": "0000000001",
+                        "beforeBalance": 2500,
+                        "afterBalance": 5000,
+                        "transactionType": "DEPOSIT",
+                        "senderAccountNumber": "N/A",
+                        "recipientAccountNumber": "N/A",
+                        "amountDeposited": 2500,
+                        "amountWithdrew": 0,
+                        "amountTransferred": 0,
+                        "dateTime": "2021-01-15T23:42:48.4361285"
+                    },
+                    {
+                        "id": 4,
+                        "accountNumber": "0000000001",
+                        "beforeBalance": 5000,
+                        "afterBalance": 4500,
+                        "transactionType": "WITHDRAW",
+                        "senderAccountNumber": "N/A",
+                        "recipientAccountNumber": "N/A",
+                        "amountDeposited": 0,
+                        "amountWithdrew": 500,
+                        "amountTransferred": 0,
+                        "dateTime": "2021-01-15T23:43:27.4095009"
+                    }
+                ]
+            </remarks>
+            <param name="transactionReportParameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SpiralWorksWalletBackendExam.Controllers.UserAccountController.Deposit(System.Double)">
+            <summary>
+            Deposit fund from account, requires token from Login.
+            </summary>
+            <param name="amount"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SpiralWorksWalletBackendExam.Controllers.UserAccountController.Withdraw(System.Double)">
+            <summary>
+            Withdraw fund from account, requires token from Login.
+            </summary>
+            <param name="amount"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SpiralWorksWalletBackendExam.Controllers.UserAccountController.TransferFund(SpiralWorksWalletBackendExam.Dtos.TransactionDto.TransferFundDto)">
+            <summary>
+            Transfer fund from one account to another, requires token from Login.
+            </summary>
+            <param name="transferDetails"></param>
+            <param name="transferDetails.TransactionType.TransactionType"> It can be Deposit, Withdraw and Transfer in any case.</param>"
+            <returns></returns>
+        </member>
+    </members>
+</doc>
