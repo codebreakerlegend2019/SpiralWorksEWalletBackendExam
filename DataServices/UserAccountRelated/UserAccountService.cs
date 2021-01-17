@@ -64,7 +64,8 @@ namespace SpiralWorksWalletBackendExam.DataServices.UserAccountRelated
         {
             if (string.IsNullOrEmpty(transferDetail.DestinationAccountNumber))
                 return new TransactionResultDto("Destination Account Number is Empty");
-
+            if (transferDetail.Amount <= 0)
+                return new TransactionResultDto("Amount should be greater than 0");
             var sender = await _context.UserAccounts.FindAsync(userId);
             if (sender == null)
                 return new TransactionResultDto("Sender Not Found!");
